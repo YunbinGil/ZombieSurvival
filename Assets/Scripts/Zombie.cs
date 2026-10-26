@@ -83,7 +83,7 @@ public class Zombie : LivingEntity
     {
         base.OnEnable();
         agent.enabled = true;
-        agent.ResetPath(); //이전 경로가 남아았으면 안됨.
+        
 
         //초기위치 (Nav Mesh 위에 있는 점이어야됨) 
         // NavMesh.SamplePosition(): 현재 씬의 NavMesh 위 점을 하나 리턴하게됨
@@ -98,8 +98,14 @@ public class Zombie : LivingEntity
         CurrentStatus = Status.Idle; //프로퍼티로 할당해야 setter 코드가 실행됨
 
         lastAttackTime = 0f;
+    }
 
-
+    private void OnDisable()
+    {
+        if (agent.isOnNavMesh)
+        {
+            agent.ResetPath(); //이전 경로가 남아았으면 안됨.
+        }
     }
 
     private void Update()
@@ -170,9 +176,9 @@ public class Zombie : LivingEntity
         }       
 
     }
-
     private void UpdateDie()
     {
+        
     }
 
     private Transform FindTarget(float radius)
