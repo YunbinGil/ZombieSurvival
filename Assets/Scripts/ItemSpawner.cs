@@ -1,9 +1,6 @@
 using System.Collections.Generic;
-using UnityEditor.Analytics;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.PlayerLoop;
-using UnityEngine.UIElements;
 
 public class ItemSpawner : MonoBehaviour
 {
@@ -12,12 +9,18 @@ public class ItemSpawner : MonoBehaviour
     public float maxX = 10f;
     public float minZ = -10f;
     public float maxZ = 10f;
-    private readonly List<GameObject> items = new List<GameObject>();
-    private readonly List<GameObject> itemPool = new List<GameObject>();
+    private List<GameObject>[] itemPool;
     private float timer;
     public float spawnInterval = 3f;
 
-
+    private void Awake()
+    {
+        itemPool = new List<GameObject>[itemPrefabs.Length];
+        for(int i=0; i<itemPool.Length; i++)
+        {
+            itemPool[i] = new List<GameObject>();
+        }
+    }
     private void Update()
     {
         timer += Time.deltaTime;
@@ -30,7 +33,20 @@ public class ItemSpawner : MonoBehaviour
     
     private void CreateItem()
     {
-        GameObject prefab = itemPrefabs[Random.Range(0, itemPrefabs.Length)];
+        int index = Random.Range(0, itemPrefabs.Length);
+
+        if (itemPool[index].Count == 0)
+        {
+            GameObject newItemGo = Instantiate(itemPrefabs[index]);
+            itemPool[index].Add(newItemGo);
+            newItemGo.SetActive(false);
+
+            IItem newItem = newItemGo.GetComponent<IItem>();
+            if(newItem != null)
+            {
+                newItem.OnUse.AddListener(()=> itemPool[index].Add(newItemGo));
+            }
+        }
         Vector3 pos = Vector3.zero;
         
         pos.x = Random.Range(minX, maxX);
@@ -39,7 +55,10 @@ public class ItemSpawner : MonoBehaviour
         if(NavMesh.SamplePosition(pos, out NavMeshHit hit, 10f, NavMesh.AllAreas)){
             pos = hit.position;
             pos.y = 0.5f;
-            Instantiate(prefab, hit.position, Quaternion.identity);
+            
+            itemPool[index][0].transform.position = pos;
+            itemPool[index][0].SetActive(true);
+            itemPool[index].RemoveAt(0);
         }
         else
         {

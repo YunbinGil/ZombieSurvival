@@ -6,6 +6,9 @@ public class UsableItem : MonoBehaviour, IItem
     public UnityEvent OnMeet;
     public AudioSource audioPlayer;
     public AudioClip pickupClip;
+
+    public UnityEvent OnUse { get; set; }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
