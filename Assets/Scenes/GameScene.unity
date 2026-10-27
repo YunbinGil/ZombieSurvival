@@ -654,19 +654,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   itemPrefabs:
-  - {fileID: 8372340768337045141, guid: c90bf41c504e541b98989b07b736097c, type: 3}
-  - {fileID: 7285587300734972414, guid: b4e7df10a580e4a1a88a79995b741816, type: 3}
-  - {fileID: 8593616134870320807, guid: 4229c84aca58549a586e9bb7aaae97c4, type: 3}
-  coinPrefab: {fileID: 0}
-  spawnPoints:
-  - {fileID: 1735198945}
-  - {fileID: 547931}
-  - {fileID: 1108598660}
-  - {fileID: 963336531}
-  - {fileID: 1249226494}
-  - {fileID: 974068426}
-  - {fileID: 1486119663}
-  - {fileID: 1207341923}
+  - {fileID: 1045172808418600, guid: c90bf41c504e541b98989b07b736097c, type: 3}
+  - {fileID: 1676094191218838, guid: 4229c84aca58549a586e9bb7aaae97c4, type: 3}
+  - {fileID: 1838412652947266, guid: b4e7df10a580e4a1a88a79995b741816, type: 3}
+  coinPrefab: {fileID: 8593616134870320807, guid: 4229c84aca58549a586e9bb7aaae97c4,
+    type: 3}
 --- !u!1 &443447658
 GameObject:
   m_ObjectHideFlags: 0
@@ -1617,6 +1609,12 @@ PrefabInstance:
       propertyPath: uiManager
       value: 
       objectReference: {fileID: 156636070}
+    - target: {fileID: 1881157778563333915, guid: 26c6ca03088cfd941b15430ee71ab08f,
+        type: 3}
+      propertyPath: shellEjectEffect
+      value: 
+      objectReference: {fileID: 198000010131513902, guid: 8e60b325a019543cbb2e3920522a2e6b,
+        type: 3}
     - target: {fileID: 6733309352832378732, guid: 26c6ca03088cfd941b15430ee71ab08f,
         type: 3}
       propertyPath: m_LocalPosition.x

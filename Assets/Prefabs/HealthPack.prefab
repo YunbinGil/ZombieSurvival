@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 7285587300734972414}
   m_Layer: 0
   m_Name: HealthPack
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -253,9 +253,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5232ac73e43ab29469f1b6b3f84e6aee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Heartpack
-  OnMeet:
-    m_PersistentCalls:
-      m_Calls: []
-  audioPlayer: {fileID: 0}
-  pickupClip: {fileID: 0}
-  healingAmount: 50
+  heal: 50

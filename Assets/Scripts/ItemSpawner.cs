@@ -4,7 +4,7 @@ using UnityEngine.PlayerLoop;
 
 public class ItemSpawner : MonoBehaviour
 {
-    public UsableItem[] itemPrefabs;
+    public GameObject[] itemPrefabs;
     public Coin coinPrefab;
     private int wave = 0;
 
@@ -27,8 +27,8 @@ public class ItemSpawner : MonoBehaviour
     
     private void CreateItem()
     {
-        UsableItem item = Instantiate(itemPrefabs[Random.Range(0, itemPrefabs.Length)]);
+        GameObject item = Instantiate(itemPrefabs[Random.Range(0, itemPrefabs.Length)]);
         item.transform.position = new Vector3(Random.Range(-8f, 8f), 0.5f, Random.Range(-8f, 8f));
-        item.gameObject.SetActive(true);
+        item.SetActive(true);
     }
 }
