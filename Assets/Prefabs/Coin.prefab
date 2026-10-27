@@ -253,5 +253,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc07ffe0dda7e5e489154051a43c815b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Coin
-  collider: {fileID: 135642909850366264}
+  OnMeet:
+    m_PersistentCalls:
+      m_Calls: []
+  audioPlayer: {fileID: 0}
+  pickupClip: {fileID: 0}
   score: 10

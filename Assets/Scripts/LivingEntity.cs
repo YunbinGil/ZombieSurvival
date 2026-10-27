@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class LivingEntity : MonoBehaviour, IDamagable
 {
-    public float startingHeath =100f;
+    public float startingHealth =100f;
     public float Health{get; private set;}
     public bool IsDead{get; private set;}
     public UnityEvent OnDead; //죽었을때 호출할 함수 등록 가능.
@@ -12,7 +12,7 @@ public class LivingEntity : MonoBehaviour, IDamagable
     //virtual: 플레이어 / 좀비인지에 따라 달라질 수 있기 때문에
     protected virtual void OnEnable() 
     {
-        Health = startingHeath;
+        Health = startingHealth;
         IsDead = false;
     }
 
@@ -35,5 +35,7 @@ public class LivingEntity : MonoBehaviour, IDamagable
         OnDead.Invoke(); //등록된 함수 호출
     }
 
-    public void AddHealth(int amount) => Health += amount;
+    public virtual void AddHealth(int amount){
+       Health = Mathf.Clamp(Health+amount, 0, startingHealth); 
+    }
 }

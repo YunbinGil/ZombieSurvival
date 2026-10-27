@@ -7,6 +7,9 @@ public class AmmoPack : UsableItem
     public override void Use(GameObject target)
     {
         gun = target.GetComponent<PlayerShooter>().gun;
-        gun.AddAmmo(ammoAmount);
+        if(gun!= null)
+        {
+            gun.AddAmmo(ammoAmount);
+        }
     }
 }

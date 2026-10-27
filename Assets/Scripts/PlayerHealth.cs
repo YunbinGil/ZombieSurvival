@@ -29,7 +29,8 @@ public class PlayerHealth : LivingEntity
         playerInput.enabled = true;
 
         uiHealth.gameObject.SetActive(true);
-        SetHealthUI();
+        uiHealth.fillAmount = Health / startingHealth;
+
     }
     
 
@@ -37,7 +38,8 @@ public class PlayerHealth : LivingEntity
     {
         if(!IsDead) playerAudioSource.PlayOneShot(hitClip);
         base.OnDamage(damage, hitPoint, hitNormal);
-        SetHealthUI();
+        uiHealth.fillAmount = Health / startingHealth;
+
         // Debug.Log(Health);
     }
     public override void Die()
@@ -52,7 +54,9 @@ public class PlayerHealth : LivingEntity
         uiHealth.enabled = true;
         uiHealth.gameObject.SetActive(false);
     }
-        
-    public void SetHealthUI() => uiHealth.fillAmount = Health / startingHeath;
-
+    public override void AddHealth(int amount)
+    {
+        base.AddHealth(amount);
+        uiHealth.fillAmount = Health / startingHealth;
+    }
 }

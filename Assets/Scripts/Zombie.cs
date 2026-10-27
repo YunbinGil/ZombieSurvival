@@ -67,7 +67,7 @@ public class Zombie : LivingEntity
 
     public void Setup(ZombieData data)
     {
-        startingHeath = data.maxHp;
+        startingHealth = data.maxHp;
         damage = data.damage;
         agent.speed = data.speed; //유니티 단위 (초속)
         zombieRenderer.material.color = data.skinColor;
