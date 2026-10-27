@@ -12,6 +12,13 @@ public class PlayerInput : MonoBehaviour
     public bool Fire {get; private set;}
     public bool Reload {get; private set;}
 
+    private void OnDisable()
+    {
+        Move = 0;
+        Rotate = 0;
+        Fire = false;
+        Reload = false;
+    }
     private void Update()
     {
         Move = Input.GetAxis(MoveAxis);
