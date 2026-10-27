@@ -11,6 +11,6 @@ public class HealthPack : MonoBehaviour, IItem
         {
             livingEntity.AddHealth(heal);
         }
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

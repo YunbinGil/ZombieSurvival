@@ -12,6 +12,6 @@ public class AmmoPack : MonoBehaviour, IItem
             return;
         }
         shooter.gun.AddAmmo(ammo);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }
