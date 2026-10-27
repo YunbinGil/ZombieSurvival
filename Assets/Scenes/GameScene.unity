@@ -580,8 +580,8 @@ GameObject:
   m_Component:
   - component: {fileID: 443425841}
   - component: {fileID: 443425840}
-  - component: {fileID: 443425842}
   - component: {fileID: 443425843}
+  - component: {fileID: 443425842}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -641,6 +641,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   uiManager: {fileID: 156636070}
+  zombieSpawner: {fileID: 443425840}
+  itemSpawner: {fileID: 443425843}
 --- !u!114 &443425843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -657,8 +659,11 @@ MonoBehaviour:
   - {fileID: 1045172808418600, guid: c90bf41c504e541b98989b07b736097c, type: 3}
   - {fileID: 1676094191218838, guid: 4229c84aca58549a586e9bb7aaae97c4, type: 3}
   - {fileID: 1838412652947266, guid: b4e7df10a580e4a1a88a79995b741816, type: 3}
-  coinPrefab: {fileID: 8593616134870320807, guid: 4229c84aca58549a586e9bb7aaae97c4,
-    type: 3}
+  minX: -10
+  maxX: 10
+  minZ: -10
+  maxZ: 10
+  spawnInterval: 5
 --- !u!1 &443447658
 GameObject:
   m_ObjectHideFlags: 0
@@ -1678,7 +1683,7 @@ PrefabInstance:
     - target: {fileID: 7526428666765780194, guid: 26c6ca03088cfd941b15430ee71ab08f,
         type: 3}
       propertyPath: startingHealth
-      value: 500
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -6,9 +7,10 @@ public class UIManager : MonoBehaviour
     public Text ammoText;
     public Text waveInfoText;
     public Text scoreText;
+    public GameObject gameOverUI;
     private void OnEnable()
     {
-        SetAmmoText(0,0);
+        SetActiveGameoverUI(false);
     }
     public void SetAmmoText(int magAmmo, int remainAmmo)
     {
@@ -22,6 +24,7 @@ public class UIManager : MonoBehaviour
     public void SetScoreText(int score)
     {
         scoreText.text = $"SCORE : {score}";
-    }
+    } 
+    public void SetActiveGameoverUI(bool active) => gameOverUI.SetActive(active);
   
 }

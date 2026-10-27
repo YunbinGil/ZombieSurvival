@@ -12,7 +12,6 @@ public class PlayerHealth : LivingEntity
     private PlayerInput playerInput;
     public Image uiHealth;
 
-
     private void Awake()
     {
         playerAudioSource = GetComponent<AudioSource>();

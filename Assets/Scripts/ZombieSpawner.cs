@@ -1,12 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-using UnityEngine.UI;
-using UnityEditor.Rendering;
 
 public class ZombieSpawner : MonoBehaviour
 {
-    public UIManager uiManager;
+    private UIManager uiManager;
+    private GameManager gameManager;
     public Zombie zombiePrefab;
     public ZombieData[] zombieDatas;
     public Transform[] spawnPoints;
@@ -15,6 +14,12 @@ public class ZombieSpawner : MonoBehaviour
     private readonly List<Zombie> zombiePool = new List<Zombie>(); //비활성화 된 zombies
 
     private int wave = 0;
+    private void Start()
+    {
+        gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
+        uiManager = gameManager.uiManager;
+   
+    }
 
     private void Update()
     {
@@ -56,6 +61,8 @@ public class ZombieSpawner : MonoBehaviour
             //[삭제]
             //zombie.OnDead.AddListener(()=>Destroy(zombie.gameObject, 5f)); //Destory 2번째인자: 지연. 5초후에 destory 
             zombie.OnDead.AddListener(()=>uiManager.SetWaveInfoText(wave, zombies.Count));
+            zombie.OnDead.AddListener(()=>gameManager.AddScore(50));
+
         }
         
         zombie = zombiePool[0]; //생성이 아닌 재사용 
@@ -76,5 +83,13 @@ public class ZombieSpawner : MonoBehaviour
         yield return new WaitForSeconds(5f); //5초 후에
         zombie.gameObject.SetActive(false);
         zombiePool.Add(zombie);
+    }
+
+    public void OnEndGame()
+    {
+        for(int i=zombies.Count -1; i>=0; i--)
+        {
+            zombies[i].Die();
+        }
     }
 }
