@@ -49,6 +49,13 @@ public class ZombieSpawner : MonoBehaviour
             zombie = Instantiate(zombiePrefab);
             zombie.gameObject.SetActive(false);
             zombiePool.Add(zombie);
+            zombie.OnDead.AddListener(()=>zombies.Remove(zombie)); //OnDead에 메소드를 등록하는. 매개변수x, 반환x 메소드 이름 
+        
+            // zombie.OnDead.AddListener(()=>zombiePool.Add(zombie)); //x. 이렇게 하면 죽음처리 되기전에 바로 사용됨.
+            zombie.OnDead.AddListener(()=>StartCoroutine(CoReturnToPoolZombie(zombie)));
+            //[삭제]
+            //zombie.OnDead.AddListener(()=>Destroy(zombie.gameObject, 5f)); //Destory 2번째인자: 지연. 5초후에 destory 
+            zombie.OnDead.AddListener(()=>uiManager.SetWaveInfoText(wave, zombies.Count));
         }
         
         zombie = zombiePool[0]; //생성이 아닌 재사용 
@@ -61,13 +68,7 @@ public class ZombieSpawner : MonoBehaviour
         zombiePool.Remove(zombie);
         
         
-        zombie.OnDead.AddListener(()=>zombies.Remove(zombie)); //OnDead에 메소드를 등록하는. 매개변수x, 반환x 메소드 이름 
         
-        // zombie.OnDead.AddListener(()=>zombiePool.Add(zombie)); //x. 이렇게 하면 죽음처리 되기전에 바로 사용됨.
-        zombie.OnDead.AddListener(()=>StartCoroutine(CoReturnToPoolZombie(zombie)));
-        //[삭제]
-        //zombie.OnDead.AddListener(()=>Destroy(zombie.gameObject, 5f)); //Destory 2번째인자: 지연. 5초후에 destory 
-        zombie.OnDead.AddListener(()=>uiManager.SetWaveInfoText(wave, zombies.Count));
     }
 
     private IEnumerator CoReturnToPoolZombie(Zombie zombie)
