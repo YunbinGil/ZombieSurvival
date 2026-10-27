@@ -17,7 +17,6 @@ public class Gun : MonoBehaviour
     public ParticleSystem shellEjectFlashEffect;
     private LineRenderer bulletLineRenderer;
     private AudioSource gunAudioPlayer;
-    public AudioSource reloadPlayer;
     public GunData gunData;
 
     private float fireDistance = 50f;
@@ -125,5 +124,11 @@ public class Gun : MonoBehaviour
         CurrentState = State.Ready;
         // Debug.Log("state: ready");
     }    
+
+    public void AddAmmo(int amount)
+    {
+        ammoRemain += amount;
+        uiManager.SetAmmoText(magAmmo, ammoRemain);
+    }
 
 }

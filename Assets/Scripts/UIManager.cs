@@ -5,6 +5,7 @@ public class UIManager : MonoBehaviour
 {
     public Text ammoText;
     public Text waveInfoText;
+    public Text scoreText;
     private void OnEnable()
     {
         SetAmmoText(0,0);
@@ -17,6 +18,10 @@ public class UIManager : MonoBehaviour
     public void SetWaveInfoText(int wave, int enemyLeft)
     {
         waveInfoText.text= $"WAVE : {wave}\nENEMY LEFT : {enemyLeft}";
+    }
+    public void SetScoreText(int score)
+    {
+        scoreText.text = $"SCORE : {score}";
     }
   
 }

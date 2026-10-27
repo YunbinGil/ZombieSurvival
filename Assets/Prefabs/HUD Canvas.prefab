@@ -199,6 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   ammoText: {fileID: 114981677178112688}
   waveInfoText: {fileID: 114843940844466002}
+  scoreText: {fileID: 114010141499081232}
 --- !u!1 &1092682336142274
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,7 +218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &224904330433119816
 RectTransform:
   m_ObjectHideFlags: 0

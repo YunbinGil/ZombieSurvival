@@ -34,4 +34,6 @@ public class LivingEntity : MonoBehaviour, IDamagable
         IsDead = true;
         OnDead.Invoke(); //등록된 함수 호출
     }
+
+    public void AddHealth(int amount) => Health += amount;
 }
