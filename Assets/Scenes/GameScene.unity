@@ -306,6 +306,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 114186528587364174, guid: 63226789a2ac34fec8493b064c47bd44,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 443425842}
+    - target: {fileID: 114186528587364174, guid: 63226789a2ac34fec8493b064c47bd44,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 114186528587364174, guid: 63226789a2ac34fec8493b064c47bd44,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 224345049331407482, guid: 63226789a2ac34fec8493b064c47bd44,
         type: 3}
       propertyPath: m_Pivot.x
@@ -601,7 +616,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d6c12de500f8a4439fd8312e9dc7fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZombieSpawner
-  uiManager: {fileID: 156636070}
   zombiePrefab: {fileID: 6118476437003848648, guid: 948dbe7ec455e584c94e8703bab043c1,
     type: 3}
   zombieDatas:
@@ -1683,7 +1697,42 @@ PrefabInstance:
     - target: {fileID: 7526428666765780194, guid: 26c6ca03088cfd941b15430ee71ab08f,
         type: 3}
       propertyPath: startingHealth
-      value: 1000
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7526428666765780194, guid: 26c6ca03088cfd941b15430ee71ab08f,
+        type: 3}
+      propertyPath: OnDead.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7526428666765780194, guid: 26c6ca03088cfd941b15430ee71ab08f,
+        type: 3}
+      propertyPath: OnDead.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7526428666765780194, guid: 26c6ca03088cfd941b15430ee71ab08f,
+        type: 3}
+      propertyPath: OnDead.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 443425842}
+    - target: {fileID: 7526428666765780194, guid: 26c6ca03088cfd941b15430ee71ab08f,
+        type: 3}
+      propertyPath: OnDead.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7526428666765780194, guid: 26c6ca03088cfd941b15430ee71ab08f,
+        type: 3}
+      propertyPath: OnDead.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EndGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 7526428666765780194, guid: 26c6ca03088cfd941b15430ee71ab08f,
+        type: 3}
+      propertyPath: OnDead.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7526428666765780194, guid: 26c6ca03088cfd941b15430ee71ab08f,
+        type: 3}
+      propertyPath: OnDead.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
