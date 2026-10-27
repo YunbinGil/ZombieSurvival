@@ -1,15 +1,16 @@
 using UnityEngine;
 
-public class Heartpack : UsableItem
+public class HealthPack : MonoBehaviour, IItem
 {
-    public int healingAmount = 50;
-    private LivingEntity livingEntity;
-    public override void Use(GameObject target)
+    public int heal = 50;
+
+    public void Use(GameObject target)
     {
-        livingEntity = target.GetComponent<LivingEntity>();
+        LivingEntity livingEntity = target.GetComponent<LivingEntity>();
         if (livingEntity != null)
         {
-            livingEntity.AddHealth(healingAmount);
+            livingEntity.AddHealth(heal);
         }
+        Destroy(gameObject);
     }
 }

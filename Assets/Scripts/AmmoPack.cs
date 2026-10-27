@@ -1,15 +1,17 @@
 using UnityEngine;
 
-public class AmmoPack : UsableItem
+public class AmmoPack : MonoBehaviour, IItem
 {
-    private Gun gun;
-    public int ammoAmount = 50;
-    public override void Use(GameObject target)
+    public int ammo = 50;
+
+    public void Use(GameObject target)
     {
-        gun = target.GetComponent<PlayerShooter>().gun;
-        if(gun!= null)
+        PlayerShooter shooter = target.GetComponent<PlayerShooter>();
+        if (shooter == null || shooter.gun == null)
         {
-            gun.AddAmmo(ammoAmount);
+            return;
         }
+        shooter.gun.AddAmmo(ammo);
+        Destroy(gameObject);
     }
 }

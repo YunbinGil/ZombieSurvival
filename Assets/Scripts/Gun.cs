@@ -7,23 +7,34 @@ public class Gun : MonoBehaviour
     {
         Ready,
         Empty,
-        Reloading
+        Realoding,
     }
 
-    public State CurrentState {get; private set;} //기본값은 Ready
+    public State CurrentState { get; private set; }
 
     public Transform fireTransform;
-    public ParticleSystem muzzleFlashEffect;
-    public ParticleSystem shellEjectFlashEffect;
-    private LineRenderer bulletLineRenderer;
-    private AudioSource gunAudioPlayer;
-    public GunData gunData;
 
+    public ParticleSystem muzzleFlashEffect;
+    public ParticleSystem shellEjectEffect;
+
+    private LineRenderer bulletLineRenderer;
+
+    private AudioSource gunAudioPlayer;
+
+    public GunData gunData;
     private float fireDistance = 50f;
     private int ammoRemain;
     private int magAmmo;
+
     private float lastFireTime;
+
     public UIManager uiManager;
+
+    public void AddAmmo(int add)
+    {
+        ammoRemain += add;
+        uiManager.SetAmmoText(magAmmo, ammoRemain);
+    }
 
     private void Awake()
     {
@@ -40,28 +51,30 @@ public class Gun : MonoBehaviour
         magAmmo = gunData.magCapcity;
         uiManager.SetAmmoText(magAmmo, ammoRemain);
 
-        CurrentState = State.Ready;   
+        CurrentState = State.Ready;
         lastFireTime = 0f;
     }
 
-    public void Fire() //사용자입력-Fire1눌렸을때 호출될 함수
+    public void Fire()
     {
-        if(CurrentState == State.Ready && Time.time >= lastFireTime + gunData.timeBetFire)
+        if (CurrentState == State.Ready && Time.time >= lastFireTime + gunData.timeBetFire)
         {
             lastFireTime = Time.time;
             Shoot();
-        }        
+        }
     }
-    public LayerMask targetLayer;
-    private void Shoot() //실제로 총알 한 발 나갈때 호출
-    {
 
+    public LayerMask targetLayer;
+
+    private void Shoot()
+    {
         Vector3 hitPosition;
-        //히트스캔방식 
+
         Ray ray = new Ray(fireTransform.position, fireTransform.forward);
-        if(Physics.Raycast(ray, out RaycastHit hit, fireDistance, targetLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, fireDistance, targetLayer))
         {
             hitPosition = hit.point;
+
             IDamagable target = hit.collider.GetComponent<IDamagable>();
             if (target != null)
             {
@@ -72,63 +85,56 @@ public class Gun : MonoBehaviour
         {
             hitPosition = fireTransform.position + fireTransform.forward * fireDistance;
         }
-        StartCoroutine(ShotEffect(hitPosition));
+
+        StartCoroutine(CoShotEffect(hitPosition));
 
         magAmmo--;
         uiManager.SetAmmoText(magAmmo, ammoRemain);
 
-        if(magAmmo == 0)
+        if (magAmmo == 0)
         {
             CurrentState = State.Empty;
         }
     }
 
-    private IEnumerator ShotEffect(Vector3 hitPosition)
+    private IEnumerator CoShotEffect(Vector3 hitPosition)
     {
         muzzleFlashEffect.Play();
-        shellEjectFlashEffect.Play();
+        shellEjectEffect.Play();
         gunAudioPlayer.PlayOneShot(gunData.shotClip);
 
         bulletLineRenderer.SetPosition(0, fireTransform.position);
         bulletLineRenderer.SetPosition(1, hitPosition);
         bulletLineRenderer.enabled = true;
         yield return new WaitForSeconds(0.03f);
-        bulletLineRenderer.enabled = false;
 
+        bulletLineRenderer.enabled = false;
     }
 
     public bool Reload()
     {
-        if(CurrentState == State.Reloading || ammoRemain==0 || magAmmo==gunData.magCapcity ) return false;
-        // CurrentState = State.Reloading; 
-        
-        StartCoroutine(ReloadRoutine());
+        if (CurrentState == State.Realoding || ammoRemain <= 0 || magAmmo >= gunData.magCapcity)
+        {
+            return false;
+        }
 
+        StartCoroutine(CoReload());
         return true;
     }
- 
-    private IEnumerator ReloadRoutine()
-    {
-        CurrentState = State.Reloading; 
-        // Debug.Log("state: reloading");
 
+    private IEnumerator CoReload()
+    {
+        CurrentState = State.Realoding;
         gunAudioPlayer.PlayOneShot(gunData.reloadClip);
-        
         yield return new WaitForSeconds(gunData.reloadTime);
-        
-        int amount = Mathf.Min(ammoRemain, gunData.magCapcity-magAmmo);
-        magAmmo += amount;
-        ammoRemain -= amount;
+
+        int ammoToFill = Mathf.Min(gunData.magCapcity - magAmmo, ammoRemain);
+
+        magAmmo += ammoToFill;
+        ammoRemain -= ammoToFill;
+
         uiManager.SetAmmoText(magAmmo, ammoRemain);
-        
+
         CurrentState = State.Ready;
-        // Debug.Log("state: ready");
-    }    
-
-    public void AddAmmo(int amount)
-    {
-        ammoRemain += amount;
-        uiManager.SetAmmoText(magAmmo, ammoRemain);
     }
-
 }
